@@ -1,0 +1,26 @@
+plugins {
+    id 'base'
+    id 'org.hidetake.swagger.generator'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    swaggerCodegen 'org.openapitools:openapi-generator-cli:3.3.4'
+}
+
+swaggerSources {
+    petstore {
+        inputFile = file("$rootDir/openapi-v3-petstore.yaml")
+        code {
+            language = 'html'
+            templateDir = file("$rootDir/build/templates/openapi3/htmlDocs")
+        }
+    }
+}
+
+swaggerSources*.code*.dependsOn ':prepareTemplates'
+
+build.dependsOn generateSwaggerCode

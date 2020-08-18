@@ -1,0 +1,15 @@
+plugins {
+    id 'base'
+    id 'org.hidetake.swagger.generator'
+}
+
+swaggerSources {
+    petstore {
+        inputFile = file("$rootDir/openapi-v2-petstore.yaml")
+    }
+    invalidPetstore {
+        inputFile = file("$rootDir/openapi-v2-invalid.yaml")
+    }
+}
+
+build.dependsOn validateSwagger
